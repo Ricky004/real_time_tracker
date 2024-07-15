@@ -1,4 +1,4 @@
-let socket = new WebSocket("ws://localhost:8080/ws");
+let socket = new WebSocket(PORT);
 
 socket.onopen = function () {
     console.log("Connection established");
@@ -30,23 +30,25 @@ if (navigator.geolocation) {
 
 socket.onclose = function (event) {
     if (event.wasClean) {
-        document.getElementById('status').innerText = `Connection closed cleanly, code=${event.code} reason=${event.reason}`;
         console.log(`Connection closed cleanly, code=${event.code} reason=${event.reason}`);
     } else {
-        document.getElementById('status').innerText = "Connection died";
         console.log('Connection died');
     }
 };
 
 socket.onerror = function (error) {
-    document.getElementById('status').innerText = `WebSocket error: ${error.message}`;
     console.log(`WebSocket error: ${error.message}`);
 };
 
 
-const map = L.map("map").setView([0, 0], 16);
+const map = L.map("map").fitWorld();
+map.locate({
+    setView: true,
+    maxZoom: 18,
+})
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
     attribution: "Tridip Dam"
 }).addTo(map);
 
