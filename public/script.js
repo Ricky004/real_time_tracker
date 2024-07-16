@@ -1,4 +1,4 @@
-let socket = new WebSocket(PORT);
+let socket = new WebSocket("ws://localhost:8080/ws");
 
 socket.onopen = function () {
     console.log("Connection established");
