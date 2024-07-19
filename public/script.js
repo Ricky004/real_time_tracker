@@ -1,4 +1,4 @@
-let socket = new WebSocket("ws://localhost:8080/ws");
+let socket = new WebSocket("https://icons-sports-scales-corps.trycloudflare.com/ws");
 
 socket.onopen = function () {
     console.log("Connection established");
